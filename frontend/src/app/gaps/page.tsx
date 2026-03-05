@@ -138,6 +138,18 @@ export default function GapsPage() {
         {/* Controls */}
         <div className="flex flex-wrap items-center gap-3 mb-6">
 
+          {/* Collection selector */}
+          <select
+            value={collection}
+            onChange={(e) => setCollection(e.target.value)}
+            className="px-3 py-1.5 text-sm rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+          >
+            <option value="default">default</option>
+            <option value="vaultpay">vaultpay</option>
+            <option value="fraudshield">fraudshield</option>
+            <option value="us-payments">us-payments</option>
+          </select>
+
           {/* Status filter */}
           <div className="flex gap-1">
             {["open", "reviewing", "resolved"].map((f) => (
