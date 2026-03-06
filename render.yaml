@@ -20,4 +20,4 @@ services:
         value: text-embedding-3-small
 
       - key: AUTO_SEED
-        value: "true"        # Seeds VaultPay demo collection on cold start
+        value: "true"        # Seeds VaultPay and SunBridge demo collections on cold start

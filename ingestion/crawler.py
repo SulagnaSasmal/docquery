@@ -44,14 +44,20 @@ class DocCrawler:
         self.visited: set[str] = set()
         self.pages: list[CrawledPage] = []
 
-    async def crawl(self) -> list[CrawledPage]:
-        """Crawl the documentation site starting from base_url."""
+    async def crawl(self, extra_urls: list[str] | None = None) -> list[CrawledPage]:
+        """Crawl the documentation site starting from base_url.
+
+        extra_urls: Additional URLs to crawl directly (useful when JS-rendered
+        navigation hides links from the static HTML crawler).
+        """
         async with httpx.AsyncClient(
             follow_redirects=True,
             timeout=30.0,
             headers={"User-Agent": "DocQuery/1.0 (Documentation Indexer)"},
         ) as client:
             await self._crawl_page(client, self.base_url, depth=0)
+            for url in (extra_urls or []):
+                await self._crawl_page(client, url, depth=1)
 
         print(f"Crawled {len(self.pages)} pages from {self.base_url}")
         return self.pages
@@ -208,7 +214,7 @@ class DocCrawler:
         return "conceptual"
 
 
-async def crawl_site(url: str, **kwargs) -> list[CrawledPage]:
+async def crawl_site(url: str, extra_urls: list[str] | None = None, **kwargs) -> list[CrawledPage]:
     """Convenience function to crawl a documentation site."""
     crawler = DocCrawler(url, **kwargs)
-    return await crawler.crawl()
+    return await crawler.crawl(extra_urls=extra_urls)

@@ -7,8 +7,7 @@ interface CollectionSelectorProps {
 
 const COLLECTIONS = [
   { id: "vaultpay", label: "VaultPay", description: "Payment processing API" },
-  { id: "fraudshield", label: "FraudShield", description: "Fraud detection platform" },
-  { id: "us-payments-hub", label: "US Payments Hub", description: "ACH, Wire & RTP rails" },
+  { id: "sunbridge", label: "SunBridge Asset Atrium", description: "Enterprise investment platform" },
 ];
 
 export function CollectionSelector({ value, onChange }: CollectionSelectorProps) {
