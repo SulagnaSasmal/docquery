@@ -15,6 +15,7 @@ interface Source {
   section: string;
   score: number;
   doc_type: string;
+  excerpt?: string;
 }
 
 interface Message {

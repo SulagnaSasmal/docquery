@@ -161,12 +161,17 @@ class RAGChain:
             if section:
                 anchor = "#" + section.split(" > ")[-1].lower().replace(" ", "-")
 
+            # Build a short excerpt from the chunk text
+            raw = chunk.text.strip()
+            excerpt = raw[:220].rsplit(" ", 1)[0] + "…" if len(raw) > 220 else raw
+
             sources.append({
                 "title": chunk.metadata.get("title", "Unknown"),
                 "url": url + anchor,
                 "section": section,
                 "score": chunk.score,
                 "doc_type": chunk.metadata.get("doc_type", ""),
+                "excerpt": excerpt,
             })
 
         return sources[:5]  # Limit to top 5 unique sources
