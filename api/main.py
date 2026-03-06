@@ -10,13 +10,15 @@ from contextlib import asynccontextmanager
 from api.routes import chat, ingest, gaps as gaps_routes
 from query.memory import init_memory_db
 from gaps.tracker import init_gaps_db
+from ingestion.seed import run_demo_seed
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Initialize databases on startup."""
+    """Initialize databases and seed demo collections on startup."""
     init_memory_db()
     init_gaps_db()
+    await run_demo_seed()
     yield
 
 

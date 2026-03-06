@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: docquery-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false          # Set this in the Render dashboard
+
+      - key: CHROMA_DB_PATH
+        value: /tmp/chroma_data
+
+      - key: LLM_MODEL
+        value: gpt-4o-mini
+
+      - key: EMBEDDING_MODEL
+        value: text-embedding-3-small
+
+      - key: AUTO_SEED
+        value: "true"        # Seeds VaultPay demo collection on cold start

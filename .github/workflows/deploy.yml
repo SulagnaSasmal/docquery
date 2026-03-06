@@ -36,6 +36,9 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: true
+          # Set DOCQUERY_API_URL as a GitHub repository variable (Settings → Variables)
+          # after deploying the backend to Render. Value: https://docquery-api.onrender.com
+          NEXT_PUBLIC_API_URL: ${{ vars.DOCQUERY_API_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
