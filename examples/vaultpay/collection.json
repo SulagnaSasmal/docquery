@@ -1,0 +1,13 @@
+{
+  "id": "vaultpay",
+  "name": "VaultPay API Documentation",
+  "description": "Payment processing API reference for VaultPay — covers authentication, payments, refunds, webhooks, and error handling.",
+  "source_url": "https://sulagnasasmal.github.io/vaultpay-api-docs/",
+  "pages": [
+    { "url": "https://sulagnasasmal.github.io/vaultpay-api-docs/", "title": "VaultPay API Overview" }
+  ],
+  "chunk_strategy": "section",
+  "embedding_model": "text-embedding-3-small",
+  "indexed": false,
+  "note": "Run: python ingest.py --collection vaultpay --source https://sulagnasasmal.github.io/vaultpay-api-docs/"
+}

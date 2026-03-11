@@ -6,6 +6,7 @@ import { SourceCard } from "@/components/SourceCard";
 import { ConfidenceBadge } from "@/components/ConfidenceBadge";
 import { CollectionSelector } from "@/components/CollectionSelector";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { getDemoResponse, DEMO_BANNER } from "@/lib/demo";
 
 const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000").replace(/\/$/, "");
 
@@ -32,6 +33,7 @@ export default function ChatPage() {
   const [loading, setLoading] = useState(false);
   const [collection, setCollection] = useState("vaultpay");
   const [sessionId, setSessionId] = useState("");
+  const [demoMode, setDemoMode] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -56,9 +58,11 @@ export default function ChatPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question, session_id: sessionId, collection }),
+        signal: AbortSignal.timeout(5000),
       });
       if (!res.ok) throw new Error("Failed");
       const data = await res.json();
+      setDemoMode(false);
       setMessages((prev) => [
         ...prev,
         {
@@ -70,9 +74,18 @@ export default function ChatPage() {
         },
       ]);
     } catch {
+      // Backend unavailable — fall back to pre-loaded demo responses
+      setDemoMode(true);
+      const demo = getDemoResponse(question, collection);
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Sorry, I encountered an error. Make sure the backend is running at " + API_URL },
+        {
+          role: "assistant",
+          content: demo.answer,
+          sources: demo.sources,
+          confidence: demo.confidence,
+          confidence_score: demo.confidence_score,
+        },
       ]);
     } finally {
       setLoading(false);
@@ -108,10 +121,15 @@ export default function ChatPage() {
 
       {/* Chat Area */}
       <div className="flex-1 flex flex-col min-w-0">
-        <div className="px-6 py-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+        <div className="px-6 py-3 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex items-center justify-between gap-4">
           <span className="text-sm font-medium text-slate-700 dark:text-slate-300">
             Querying: <span className="text-indigo-600 dark:text-indigo-400">{collection}</span>
           </span>
+          {demoMode && (
+            <span className="text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-full px-3 py-1 shrink-0">
+              {DEMO_BANNER}
+            </span>
+          )}
         </div>
 
         <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">

@@ -1,0 +1,19 @@
+{
+  "id": "us-payments-hub",
+  "name": "US Payments Hub",
+  "description": "Operations reference for all six US payment rails: ACH, Fedwire, SWIFT, RTP, FedNow, and Card Networks. Includes 12 scenario walkthroughs.",
+  "source_url": "https://sulagnasasmal.github.io/us-payments-hub/",
+  "pages": [
+    { "url": "https://sulagnasasmal.github.io/us-payments-hub/index.html", "title": "Overview & Rail Comparison" },
+    { "url": "https://sulagnasasmal.github.io/us-payments-hub/ach.html", "title": "ACH Processing" },
+    { "url": "https://sulagnasasmal.github.io/us-payments-hub/fedwire.html", "title": "Fedwire" },
+    { "url": "https://sulagnasasmal.github.io/us-payments-hub/swift.html", "title": "SWIFT" },
+    { "url": "https://sulagnasasmal.github.io/us-payments-hub/rtp.html", "title": "RTP" },
+    { "url": "https://sulagnasasmal.github.io/us-payments-hub/fednow.html", "title": "FedNow" },
+    { "url": "https://sulagnasasmal.github.io/us-payments-hub/scenarios.html", "title": "Scenario Walkthroughs" }
+  ],
+  "chunk_strategy": "section",
+  "embedding_model": "text-embedding-3-small",
+  "indexed": false,
+  "note": "Run: python ingest.py --collection us-payments-hub --source https://sulagnasasmal.github.io/us-payments-hub/"
+}

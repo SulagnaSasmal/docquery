@@ -1,0 +1,16 @@
+{
+  "id": "fraudshield",
+  "name": "FraudShield AI Engine Documentation",
+  "description": "Enterprise fraud detection platform docs — risk scoring model, thresholds, AML integration, API reference, and audit logs.",
+  "source_url": "https://sulagnasasmal.github.io/fraudshield-docs/",
+  "pages": [
+    { "url": "https://sulagnasasmal.github.io/fraudshield-docs/index.html", "title": "Introduction" },
+    { "url": "https://sulagnasasmal.github.io/fraudshield-docs/risk-model.html", "title": "Risk Scoring Model" },
+    { "url": "https://sulagnasasmal.github.io/fraudshield-docs/threshold-tuning.html", "title": "Threshold Tuning" },
+    { "url": "https://sulagnasasmal.github.io/fraudshield-docs/api-integration.html", "title": "API Integration Guide" }
+  ],
+  "chunk_strategy": "section",
+  "embedding_model": "text-embedding-3-small",
+  "indexed": false,
+  "note": "Run: python ingest.py --collection fraudshield --source https://sulagnasasmal.github.io/fraudshield-docs/"
+}
